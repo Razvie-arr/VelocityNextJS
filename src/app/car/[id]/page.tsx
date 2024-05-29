@@ -2,7 +2,7 @@ import prisma from '@/utils/prisma';
 import Link from 'next/link';
 
 const fetchCarDetail = async (id: string) => {
-  return await prisma.car.findUnique({
+  return prisma.car.findUnique({
     where: {
       id: id,
     },
