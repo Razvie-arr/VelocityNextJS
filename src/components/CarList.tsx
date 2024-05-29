@@ -1,8 +1,8 @@
-import { Car } from '@prisma/client';
 import CarItem from '@/components/CarItem';
+import { CarWithDeps } from '@/types/prismaTypes';
 
 type Props = {
-  cars: Car[];
+  cars: CarWithDeps[];
 };
 
 const CarList = ({ cars }: Props) => {
@@ -11,7 +11,6 @@ const CarList = ({ cars }: Props) => {
       {cars.map((car) => (
         <CarItem key={car.id} car={car} />
       ))}
-      ;
     </div>
   );
 };
