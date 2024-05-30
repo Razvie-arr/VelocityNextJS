@@ -13,7 +13,7 @@ const NewCarForm = ({
     <div>
       <form
         action={createCar}
-        className="flex flex-col rounded-md bg-lime-300 px-10 py-5 shadow-sm shadow-gray-400"
+        className="flex flex-col rounded-md bg-sky-400 px-10 py-5 shadow-sm shadow-gray-400"
       >
         <BrandAndModelFormFields models={models} brands={brands} />
         <label htmlFor="description">Description</label>
