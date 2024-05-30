@@ -1,7 +1,6 @@
-'use client';
 import { Brand, CarModel } from '@prisma/client';
-import { useMemo, useState } from 'react';
 import { createCar } from '@/app/types/actions';
+import BrandAndModelFormFields from '@/components/BrandAndModelFormFields';
 
 const NewCarForm = ({
   models,
@@ -10,45 +9,23 @@ const NewCarForm = ({
   models: CarModel[];
   brands: Brand[];
 }) => {
-  const [brandId, setBrandId] = useState('');
-  const filteredModels = useMemo(() => {
-    return models.filter((model) => model.brandId === brandId);
-  }, [brandId, models]);
-  console.log(brandId);
-
   return (
     <div>
-      <form action={createCar} className="flex flex-col">
-        <select
-          name="brandId"
-          id=""
-          value={brandId}
+      <form
+        action={createCar}
+        className="flex flex-col rounded-md bg-lime-300 px-10 py-5 shadow-sm shadow-gray-400"
+      >
+        <BrandAndModelFormFields models={models} brands={brands} />
+        <label htmlFor="description">Description</label>
+        <textarea
+          name="description"
+          id="description"
           required={true}
-          onChange={(e) => {
-            setBrandId(e.target.value);
-          }}
-        >
-          <option value="">Select brand</option>
-          {brands.map((brand) => {
-            return (
-              <option key={brand.id} value={brand.id}>
-                {brand.name}
-              </option>
-            );
-          })}
-        </select>
-        <select name="modelId" required={true}>
-          <option value="">Select model</option>;
-          {filteredModels.map((model) => {
-            return (
-              <option key={model.id} value={model.id}>
-                {model.name}
-              </option>
-            );
-          })}
-        </select>
-        <input name="description" type="text" required={true}></input>
-        <button type="submit">Send form</button>
+          className="form-field"
+        ></textarea>
+        <button type="submit" className="btn mt-4">
+          Create new car
+        </button>
       </form>
     </div>
   );
