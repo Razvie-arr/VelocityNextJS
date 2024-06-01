@@ -6,7 +6,20 @@ const getCars = async () => {
     include: {
       model: true,
       brand: true,
+      location: true,
     },
+    orderBy: [
+      {
+        location: {
+          city: 'asc',
+        },
+      },
+      {
+        brand: {
+          name: 'asc',
+        },
+      },
+    ],
   });
 };
 

@@ -1,18 +1,22 @@
 'use client';
-import { Brand, CarModel } from '@prisma/client';
+import { Brand, CarModel, Location } from '@prisma/client';
 import { Fragment, useMemo, useState } from 'react';
 
-const BrandAndModelFormFields = ({
+const NewCarSelects = ({
   models,
   brands,
+  locations,
 }: {
   models: CarModel[];
   brands: Brand[];
+  locations: Location[];
 }) => {
+  const [locationId, setLocationId] = useState('');
   const [brandId, setBrandId] = useState('');
   const [isModelSelectDisabled, setIsModelSelectDisabled] = useState(true);
 
-  const brandPlaceholder: string = '--- Select brand ---';
+  const locationPlaceholder = '--- Select location ---';
+  const brandPlaceholder = '--- Select brand ---';
   const modelPlaceholder = '--- Select model ---';
 
   const filteredModels = useMemo(() => {
@@ -20,6 +24,27 @@ const BrandAndModelFormFields = ({
   }, [brandId, models]);
   return (
     <Fragment>
+      <label htmlFor="locationId">Location</label>
+      <select
+        name="locationId"
+        required={true}
+        id="locationId"
+        value={locationId}
+        className="form-field"
+        defaultValue=""
+        onChange={(e) => {
+          setLocationId(e.target.value);
+        }}
+      >
+        <option value="" hidden>
+          {locationPlaceholder}
+        </option>
+        {locations.map((location) => (
+          <option key={location.id} value={location.id}>
+            {location.city}
+          </option>
+        ))}
+      </select>
       <label htmlFor="brandId">Brand</label>
       <select
         name="brandId"
@@ -64,4 +89,4 @@ const BrandAndModelFormFields = ({
   );
 };
 
-export default BrandAndModelFormFields;
+export default NewCarSelects;

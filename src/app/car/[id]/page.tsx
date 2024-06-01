@@ -1,4 +1,5 @@
 import prisma from '@/utils/prisma';
+import CarDetail from '@/components/CarDetail';
 
 const fetchCarDetail = async (id: string) => {
   return prisma.car.findUnique({
@@ -8,19 +9,14 @@ const fetchCarDetail = async (id: string) => {
     include: {
       model: true,
       brand: true,
+      location: true,
     },
   });
 };
 
 const CarDetailPage = async ({ params }: { params: { id: string } }) => {
   const car = await fetchCarDetail(params.id);
-  return (
-    <div>
-      <div>{car?.brand.name}</div>
-      <div>{car?.model.name}</div>
-      <div>{car?.description}</div>
-    </div>
-  );
+  return <CarDetail car={car} />;
 };
 
 export default CarDetailPage;
