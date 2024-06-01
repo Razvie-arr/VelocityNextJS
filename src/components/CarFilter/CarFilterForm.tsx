@@ -4,6 +4,7 @@ import { Brand, CarModel, Location } from '@prisma/client';
 import { redirectCarFilter } from '@/app/types/actions';
 import CarBrandModelSelects from '@/components/CarBrandModelSelects';
 import CarDescriptionColorInputs from '@/components/CarDescriptionColorInputs';
+import CarFilterPriceRange from '@/components/CarFilter/CarFilterPriceRange';
 
 export const CarFilterForm = ({
   locations,
@@ -23,6 +24,7 @@ export const CarFilterForm = ({
         allSelectsAreRequired={false}
       />
       <CarDescriptionColorInputs allInputsRequired={false} />
+      <CarFilterPriceRange />
       <button type="submit" className="btn mt-4">
         Search cars
       </button>

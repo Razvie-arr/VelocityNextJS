@@ -6,7 +6,6 @@ import {
   fetchModels,
 } from '@/app/types/actions';
 import CarFilterForm from '@/components/CarFilter/CarFilterForm';
-import * as sea from 'node:sea';
 
 export interface CarSearchParams {
   brandName?: string | null;
@@ -14,6 +13,8 @@ export interface CarSearchParams {
   city?: string | null;
   description?: string | null;
   color?: string | null;
+  minPrice?: number | null;
+  maxPrice?: number | null;
 }
 const Home = async ({
   params,
@@ -26,6 +27,8 @@ const Home = async ({
     city?: string | null;
     description?: string | null;
     color?: string | null;
+    minPrice?: number | null;
+    maxPrice?: number | null;
   };
 }) => {
   const locations = await fetchLocations();
@@ -38,11 +41,14 @@ const Home = async ({
   carSearchParams.city = searchParams.city;
   carSearchParams.description = searchParams.description;
   carSearchParams.color = searchParams.color;
+  carSearchParams.minPrice = searchParams.minPrice;
+  carSearchParams.maxPrice = searchParams.maxPrice;
+
   const cars = await fetchCarsWithFilter(carSearchParams);
   return (
     <div className="flex flex-col rounded-md bg-sky-400 px-10 py-5 shadow-sm shadow-gray-400">
       <CarFilterForm locations={locations} brands={brands} models={models} />
-      <CarList cars={cars} />
+      {cars.length > 0 ? <CarList cars={cars} /> : 'No cars found'}
     </div>
   );
 };

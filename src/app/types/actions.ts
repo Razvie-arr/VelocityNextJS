@@ -56,6 +56,17 @@ export const fetchCarsWithFilter = async (carSearchParams: CarSearchParams) => {
       contains: carSearchParams.color || '',
     };
   }
+  if (carSearchParams.minPrice) {
+    whereClause.price = {
+      gte: parseFloat(String(carSearchParams.minPrice)),
+    };
+  }
+  if (carSearchParams.maxPrice) {
+    whereClause.price = {
+      lte: parseFloat(String(carSearchParams.maxPrice)),
+    };
+  }
+
   return prisma.car.findMany({
     where: whereClause,
     include: {
@@ -85,6 +96,9 @@ export const redirectCarFilter = async (formData: FormData) => {
   const modelId = formData.get('modelId')?.toString();
   const description = formData.get('description')?.toString();
   const color = formData.get('color')?.toString();
+  const minPrice = formData.get('minPrice');
+  const maxPrice = formData.get('maxPrice');
+  console.log(formData);
   if (brandId) {
     const brandName = await findBrandNameById(brandId);
     if (brandName) {
@@ -105,6 +119,12 @@ export const redirectCarFilter = async (formData: FormData) => {
   }
   if (color) {
     newUrl = addParam(newUrl, 'color', color);
+  }
+  if (minPrice) {
+    newUrl = addParam(newUrl, 'minPrice', minPrice.toString());
+  }
+  if (maxPrice) {
+    newUrl = addParam(newUrl, 'maxPrice', maxPrice.toString());
   }
 
   redirect('/' + newUrl);
