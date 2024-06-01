@@ -16,6 +16,9 @@ const fetchCarDetail = async (id: string) => {
 
 const CarDetailPage = async ({ params }: { params: { id: string } }) => {
   const car = await fetchCarDetail(params.id);
+  if (!car) {
+    return <div>Car does not exist</div>;
+  }
   return <CarDetail car={car} />;
 };
 

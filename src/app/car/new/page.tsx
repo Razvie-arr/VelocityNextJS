@@ -1,17 +1,6 @@
 import prisma from '@/utils/prisma';
 import NewCarForm from '@/components/NewCar/NewCarForm';
-
-const fetchLocations = async () => {
-  return prisma.location.findMany();
-};
-
-const fetchBrands = async () => {
-  return prisma.brand.findMany();
-};
-
-const fetchModels = async () => {
-  return prisma.carModel.findMany();
-};
+import { fetchBrands, fetchLocations, fetchModels } from '@/app/types/actions';
 
 const NewCarPage = async () => {
   const locations = await fetchLocations();

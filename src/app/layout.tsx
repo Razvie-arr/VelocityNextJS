@@ -18,9 +18,8 @@ export default function RootLayout({
           <div className="mx-auto max-w-7xl px-4">
             <div className="mx-auto max-w-3xl">
               <h2 className="flex justify-evenly py-5 text-3xl font-bold tracking-tight text-gray-900">
-                <Link href={'/'}>All cars</Link>
+                <Link href={'/'}>Home</Link>
                 <Link href={'/car/new'}>Create new car</Link>
-                <Link href={'/car/filter'}>Car filter</Link>
               </h2>
               {children}
             </div>
