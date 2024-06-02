@@ -1,4 +1,4 @@
-const CarDescriptionColorInputs = ({
+const CarDescriptionColorYearInputs = ({
   allInputsRequired,
 }: {
   allInputsRequired: boolean;
@@ -19,7 +19,15 @@ const CarDescriptionColorInputs = ({
         required={allInputsRequired}
         className="form-field"
       ></input>
+      <label htmlFor="year">Year</label>
+      <input
+        name="year"
+        id="year"
+        required={allInputsRequired}
+        className="form-field"
+        type="number"
+      ></input>
     </>
   );
 };
-export default CarDescriptionColorInputs;
+export default CarDescriptionColorYearInputs;

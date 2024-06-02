@@ -11,8 +11,17 @@ export const createCar = async (formData: FormData) => {
   const description = formData.get('description')?.toString();
   const price = parseFloat(formData.get('price')?.toString() as string);
   const color = formData.get('color')?.toString();
+  const year = parseInt(formData.get('year')?.toString() as string);
 
-  if (!modelId || !brandId || !description || !locationId || !price || !color) {
+  if (
+    !modelId ||
+    !brandId ||
+    !description ||
+    !locationId ||
+    !price ||
+    !color ||
+    !year
+  ) {
     return;
   }
 
@@ -24,6 +33,7 @@ export const createCar = async (formData: FormData) => {
       description: description,
       price: price,
       color: color,
+      year: year,
     },
   });
   redirect('/');
@@ -66,7 +76,9 @@ export const fetchCarsWithFilter = async (carSearchParams: CarSearchParams) => {
       lte: parseFloat(String(carSearchParams.maxPrice)),
     };
   }
-
+  if (carSearchParams.year) {
+    whereClause.year = parseInt(String(carSearchParams.year));
+  }
   return prisma.car.findMany({
     where: whereClause,
     include: {
@@ -98,7 +110,8 @@ export const redirectCarFilter = async (formData: FormData) => {
   const color = formData.get('color')?.toString();
   const minPrice = formData.get('minPrice');
   const maxPrice = formData.get('maxPrice');
-  console.log(formData);
+  const year = formData.get('year');
+
   if (brandId) {
     const brandName = await findBrandNameById(brandId);
     if (brandName) {
@@ -126,7 +139,9 @@ export const redirectCarFilter = async (formData: FormData) => {
   if (maxPrice) {
     newUrl = addParam(newUrl, 'maxPrice', maxPrice.toString());
   }
-
+  if (year) {
+    newUrl = addParam(newUrl, 'year', year.toString());
+  }
   redirect('/' + newUrl);
 };
 

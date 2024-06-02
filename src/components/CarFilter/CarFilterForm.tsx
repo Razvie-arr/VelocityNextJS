@@ -3,7 +3,7 @@ import CarFilterLocation from '@/components/CarFilter/CarFilterLocation';
 import { Brand, CarModel, Location } from '@prisma/client';
 import { redirectCarFilter } from '@/app/types/actions';
 import CarBrandModelSelects from '@/components/CarBrandModelSelects';
-import CarDescriptionColorInputs from '@/components/CarDescriptionColorInputs';
+import CarDescriptionColorYearInputs from '@/components/CarDescriptionColorYearInputs';
 import CarFilterPriceRange from '@/components/CarFilter/CarFilterPriceRange';
 
 export const CarFilterForm = ({
@@ -23,7 +23,7 @@ export const CarFilterForm = ({
         models={models}
         allSelectsAreRequired={false}
       />
-      <CarDescriptionColorInputs allInputsRequired={false} />
+      <CarDescriptionColorYearInputs allInputsRequired={false} />
       <CarFilterPriceRange />
       <button type="submit" className="btn mt-4">
         Search cars

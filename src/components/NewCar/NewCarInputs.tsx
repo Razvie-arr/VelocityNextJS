@@ -1,11 +1,11 @@
 'use client';
 import { Fragment } from 'react';
-import CarDescriptionColorInputs from '@/components/CarDescriptionColorInputs';
+import CarDescriptionColorYearInputs from '@/components/CarDescriptionColorYearInputs';
 
 const NewCarInputs = () => {
   return (
     <Fragment>
-      <CarDescriptionColorInputs allInputsRequired={true} />
+      <CarDescriptionColorYearInputs allInputsRequired={true} />
       <label htmlFor="price">Price in CZK</label>
       <input
         type="number"
