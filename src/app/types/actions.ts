@@ -3,7 +3,6 @@
 import prisma from '@/utils/prisma';
 import { redirect } from 'next/navigation';
 import { CarSearchParams } from '@/app/(home)/page';
-import { revalidatePath } from 'next/cache';
 
 export const createCar = async (formData: FormData) => {
   const modelId = formData.get('modelId')?.toString();
