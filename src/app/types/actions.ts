@@ -3,6 +3,7 @@
 import prisma from '@/utils/prisma';
 import { redirect } from 'next/navigation';
 import { CarSearchParams } from '@/app/(home)/page';
+import { revalidatePath } from 'next/cache';
 
 export const createCar = async (formData: FormData) => {
   const modelId = formData.get('modelId')?.toString();
@@ -25,18 +26,26 @@ export const createCar = async (formData: FormData) => {
     return;
   }
 
-  await prisma.car.create({
-    data: {
-      modelId: modelId,
-      brandId: brandId,
-      locationId: locationId,
-      description: description,
-      price: price,
-      color: color,
-      year: year,
-    },
-  });
-  redirect('/');
+  const modelName = await findModelNameById(modelId);
+  const brandName = await findBrandNameById(brandId);
+  const urlParams = `?brand=${brandName}&model=${modelName}`;
+
+  try {
+    await prisma.car.create({
+      data: {
+        modelId: modelId,
+        brandId: brandId,
+        locationId: locationId,
+        description: description,
+        price: price,
+        color: color,
+        year: year,
+      },
+    });
+    redirect(`/car/new/success${urlParams}`);
+  } catch (e) {
+    redirect(`/car/new/error${urlParams}`);
+  }
 };
 
 export const fetchCarsWithFilter = async (carSearchParams: CarSearchParams) => {

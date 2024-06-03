@@ -18,10 +18,8 @@ export interface CarSearchParams {
   year?: number | null;
 }
 const Home = async ({
-  params,
   searchParams,
 }: {
-  params: { slug: string };
   searchParams: {
     brand?: string | null;
     model?: string | null;

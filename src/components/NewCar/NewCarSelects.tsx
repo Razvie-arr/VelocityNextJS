@@ -23,7 +23,6 @@ const NewCarSelects = ({
         id="locationId"
         value={locationId}
         className="form-field"
-        defaultValue=""
         onChange={(e) => {
           setLocationId(e.target.value);
         }}

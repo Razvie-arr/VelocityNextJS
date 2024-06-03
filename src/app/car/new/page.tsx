@@ -1,4 +1,3 @@
-import prisma from '@/utils/prisma';
 import NewCarForm from '@/components/NewCar/NewCarForm';
 import { fetchBrands, fetchLocations, fetchModels } from '@/app/types/actions';
 

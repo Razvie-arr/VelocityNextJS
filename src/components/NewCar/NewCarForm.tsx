@@ -1,3 +1,5 @@
+'use client';
+
 import { Brand, CarModel, Location } from '@prisma/client';
 import { createCar } from '@/app/types/actions';
 import NewCarSelects from '@/components/NewCar/NewCarSelects';
